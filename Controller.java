@@ -13,8 +13,8 @@ public class Controller
       hand2 = new Hand();
 
       dealHands(5);
-      //System.out.println(hand1);
-      //System.out.println(hand2);
+      System.out.println(hand1);
+      System.out.println(hand2);
 
       hand1.sortHand();
       hand2.sortHand();
@@ -27,7 +27,10 @@ public class Controller
    }
 
    public static void dealHands(int x){
-      //TODO: Deal x cards to each player
+    for(int i = 0; i <= x; i++){
+      hand1.add(deck.remove());
+      hand2.add(deck.remove());
+    }
    }
 
    public static String findWinner(){
