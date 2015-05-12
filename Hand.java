@@ -3,6 +3,7 @@ import java.util.*;
 public class Hand implements Comparable {
    private ArrayList<Card> hand;
    public int handvalue;
+   public Map<Integer, Integer> map;
 
    public Hand(){
       hand = new ArrayList<Card>();
@@ -22,12 +23,32 @@ public class Hand implements Comparable {
 
 
    public String handValue() {
+     map = new HashMap<Integer, Integer>();
+     for(int i = 0; i < hand.size(); i++){
+       if(map.containsKey(hand.get(i).value))
+          map.put(hand.get(i).value, map.get(hand.get(i)) + 1);
+          else
+           map.put(hand.get(i).value, 1);
+    }
+
+
+     System.out.println(map);
      //Case for Royal Flush
+     if(checkStraight() && checkFlush()){
+       if(hand.get(0).value == 10)
+        {
+          handvalue = 10;
 
-     handvalue = 10;
-     //Case for Straight Flush
+         return "Royal Flush";
+         }
+       else
+      {
+        handvalue = 9;
+        return "Straight Flush";
 
-     handvalue = 9;
+      }
+     }
+
      //Case for 4 of a kind
 
      handvalue = 8;
@@ -47,11 +68,29 @@ public class Hand implements Comparable {
 
      handvalue = 3;
      //Case for One Pair
-
      handvalue = 1;
      //Case for High Card
      return "TODO: String of Best Hand; may need helper methods";
+
    }
+
+   public boolean checkFlush(){
+     String testSuit = hand.get(0).suit;
+     for(Card c : hand){
+       if(!testSuit.equals(testSuit))
+        return false;
+     }
+     return true;
+   }
+
+   public boolean checkStraight(){
+     for(int i = 1; i <= hand.size(); i++){
+       if(hand.get(i).value != hand.get(i-1).value+1)
+       return false;
+     }
+     return true;
+   }
+
 
    public int compareTo(Object x){
       Hand other = (Hand)x;
