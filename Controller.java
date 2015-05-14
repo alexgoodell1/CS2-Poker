@@ -29,7 +29,7 @@ public class Controller
    }
 
    public static void dealHands(int x){
-    for(int i = 0; i <= x; i++){
+    for(int i = 0; i < x; i++){
       hand1.add(deck.remove());
       hand2.add(deck.remove());
     }

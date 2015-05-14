@@ -38,13 +38,13 @@ public class Hand implements Comparable {
      if(checkStraight() && checkFlush()){
        if(hand.get(0).value == 10)
         {
-          handvalue = 10;
+          handvalue = 9;
 
          return "Royal Flush";
          }
        else
       {
-        handvalue = 9;
+        handvalue = 8;
         return "Straight Flush";
 
       }
@@ -52,7 +52,7 @@ public class Hand implements Comparable {
 
      //Case for 4 of a kind
      else if(map.containsValue(4)){
-       handvalue = 8;
+       handvalue = 7;
        return "4 of a kind";
      }
      else if(map.containsValue(3) && map.containsValue(2)){
@@ -60,23 +60,23 @@ public class Hand implements Comparable {
 
      //Case for Full House
 
-     handvalue = 7;
+     handvalue = 6;
      return "Full House";
    }
      //Case for Flush
      else if(checkFlush()){
-     handvalue = 6;
+     handvalue = 5;
      return "Flush";
    }
      //Case for Straight
      else if(checkStraight()){
 
-     handvalue = 5;
+     handvalue = 4;
      return "Straight";
    }
      //Case for Three of a kind
      else if(map.containsValue(3)){
-     handvalue = 4;
+     handvalue = 3;
      return "3 of a Kind";
    }
      //Case for Two Pair
@@ -89,7 +89,7 @@ public class Hand implements Comparable {
          k++;
      }
      if(k == 2){
-     handvalue = 3;
+     handvalue = 2;
 
      return "Two Pair";
    }
@@ -127,18 +127,43 @@ public class Hand implements Comparable {
 
    public int compareTo(Object x){
       Hand other = (Hand)x;
+      int k = 0;
+      int j = 0;
       //TODO: Compare hands by ordering above; return -1, 1, or 0
       if(this.handvalue < other.handvalue)
         return -1;
       else if(this.handvalue > other.handvalue)
         return 1;
       else if(this.handvalue == other.handvalue){
-        if(hand.get(hand.size()-1).value > other.hand.get(other.hand.size()-1).value)
-          return 1;
-        else
-          return -1;
+
+        for(int i = 0; i < hand.size()-1; i++){
+          if(map.get(hand.get(i).value) == 2){
+            k = hand.get(i).value;
+          }
         }
-      else
+        for(int i = 0; i < other.hand.size()-1; i++){
+          if(other.map.get(other.hand.get(i).value) == 2){
+            j = other.hand.get(i).value;
+          }
+        }
+        System.out.println(k);
+        System.out.println(j);
+        if(k > j)
+          return 1;
+        else if(j > k)
+          return -1;
+        else if(j == k){
+          if(hand.get(hand.size()-1).value > other.hand.get(other.hand.size()-1).value)
+            return 1;
+            if(hand.get(hand.size()-1).value < other.hand.get(other.hand.size()-1).value)
+              return -1;
+              if(hand.get(hand.size()-1).value == other.hand.get(other.hand.size()-1).value)
+                return 0;
+        }
+        else
+          return 0;
+        }
+
         return 0;
    }
 }
