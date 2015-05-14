@@ -13,6 +13,8 @@ public class Controller
       hand2 = new Hand();
 
       dealHands(5);
+
+
       System.out.println(hand1);
       System.out.println(hand2);
 

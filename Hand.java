@@ -102,14 +102,14 @@ public class Hand implements Comparable {
    public boolean checkFlush(){
      String testSuit = hand.get(0).suit;
      for(Card c : hand){
-       if(!testSuit.equals(testSuit))
+       if(!testSuit.equals(c.suit))
         return false;
      }
      return true;
    }
 
    public boolean checkStraight(){
-     for(int i = 1; i <= hand.size(); i++){
+     for(int i = 1; i < hand.size(); i++){
        if(hand.get(i).value != hand.get(i-1).value+1)
        return false;
      }
@@ -125,6 +125,12 @@ public class Hand implements Comparable {
         return -1;
       else if(this.handvalue > other.handvalue)
         return 1;
+      else if(this.handvalue == other.handvalue){
+        if(hand.get(hand.size()-1).value > other.hand.get(other.hand.size()-1).value)
+          return 1;
+        else
+          return -1;
+        }
       else
         return 0;
    }
