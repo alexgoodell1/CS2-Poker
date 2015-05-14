@@ -26,9 +26,10 @@ public class Hand implements Comparable {
      map = new HashMap<Integer, Integer>();
      for(int i = 0; i < hand.size(); i++){
        if(map.containsKey(hand.get(i).value))
-          map.put(hand.get(i).value, map.get(hand.get(i)) + 1);
-          else
-           map.put(hand.get(i).value, 1);
+        map.put(hand.get(i).value,map.get(hand.get(i).value)+1);
+
+    else
+      map.put(hand.get(i).value,1);
     }
 
 
@@ -50,28 +51,52 @@ public class Hand implements Comparable {
      }
 
      //Case for 4 of a kind
+     else if(map.containsValue(4)){
+       handvalue = 8;
+       return "4 of a kind";
+     }
+     else if(map.containsValue(3) && map.containsValue(2)){
 
-     handvalue = 8;
+
      //Case for Full House
 
      handvalue = 7;
+     return "Full House";
+   }
      //Case for Flush
-
+     else if(checkFlush()){
      handvalue = 6;
+     return "Flush";
+   }
      //Case for Straight
+     else if(checkStraight()){
 
      handvalue = 5;
+     return "Straight";
+   }
      //Case for Three of a kind
-
+     else if(map.containsValue(3)){
      handvalue = 4;
+     return "3 of a Kind";
+   }
      //Case for Two Pair
+     else if(map.containsValue(2)){
 
      handvalue = 3;
-     //Case for One Pair
-     handvalue = 1;
-     //Case for High Card
-     return "TODO: String of Best Hand; may need helper methods";
 
+     return "Two Pair";
+   }
+     //Case for One Pair
+     else if(map.containsValue(2)){
+     handvalue = 1;
+     return "pair";
+   }
+     //Case for High Card
+     else{
+
+    handvalue = 0;
+     return "high card";
+   }
    }
 
    public boolean checkFlush(){
@@ -90,6 +115,7 @@ public class Hand implements Comparable {
      }
      return true;
    }
+
 
 
    public int compareTo(Object x){
