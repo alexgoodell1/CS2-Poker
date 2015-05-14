@@ -81,15 +81,22 @@ public class Hand implements Comparable {
    }
      //Case for Two Pair
      else if(map.containsValue(2)){
-
+       int k = 0;
+       Collection collection = map.values();
+       Object[] intarray = collection.toArray();
+     for(int i = 0; i < map.size();i++){
+       if(intarray[i] == 2)
+         k++;
+     }
+     if(k == 2){
      handvalue = 3;
 
      return "Two Pair";
    }
-     //Case for One Pair
-     else if(map.containsValue(2)){
+   else{
      handvalue = 1;
      return "pair";
+   }
    }
      //Case for High Card
      else{
